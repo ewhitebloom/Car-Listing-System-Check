@@ -20,7 +20,7 @@ feature 'user creates a manufacturer', %Q{
     count = Manufacturer.count
     visit '/manufacturers/new'
     fill_in 'Name', with: @manufacturer.name
-    fill_in 'Country', with: @manufacturer.country
+    select( @manufacturer.country, :from => 'Country')
     click_on 'Submit'
 
     expect(page).to have_content 'Add a New Manufacturer'
@@ -33,7 +33,7 @@ feature 'user creates a manufacturer', %Q{
     click_on 'Submit'
 
     expect(page).to have_content "Namecan't be blank"
-    expect(page).to have_content "Countrycan't be blank"
+    expect(page).to have_content "can't be blank"
     expect(page).to have_content 'Please review the problems below'
     expect(Manufacturer.count).to eql(count)
   end

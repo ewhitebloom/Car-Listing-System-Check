@@ -45,6 +45,7 @@ end
 # gem 'debugger', group: [:development, :test]
 gem 'haml'
 gem 'simple_form'
+gem 'country_select'
 
 group :test do
   gem 'factory_girl_rails'

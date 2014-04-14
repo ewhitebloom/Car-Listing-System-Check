@@ -10,6 +10,6 @@ FactoryGirl.define do
 
   factory :manufacturer do
     name 'Cadillac'
-    country 'USA'
+    country 'United States of America'
   end
 end

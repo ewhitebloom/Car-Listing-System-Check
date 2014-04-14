@@ -1,0 +1,8 @@
+<h1>Add a New Manufacturer</h1>
+
+<%= simple_form_for @manufacturer do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, required: true %>
+  <%= f.input :country, required: true %>
+  <%= f.button :submit, 'Submit' %>
+<% end %>
