@@ -1,7 +1,11 @@
+<h1>Add a New Car</h1>
+
 <%= simple_form_for @car do |f| %>
   <%= f.error_notification %>
   <%= f.input :color, required: true %>
   <%= f.input :year, required: true %>
+  <%= f.input :mileage, required: true %>
+  <%= f.input :description, as: :text %>
   <%= f.association :manufacturer, required: true %>
-  <%= f.button :submit %>
-  <% end %>
+  <%= f.button :submit, 'Submit' %>
+<% end %>

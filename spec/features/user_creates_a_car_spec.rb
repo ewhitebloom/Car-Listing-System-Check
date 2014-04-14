@@ -16,25 +16,32 @@ feature 'user creates a car', %Q{
 #   Upon successfully creating a car, I am redirected so that I can create another car.
 
   before :each do
-    car = FactoryGirl.create(:car)
+    @car = FactoryGirl.create(:car)
   end
 
   it 'submits a valid car' do
+    count = Car.count
     visit '/cars/new'
-    fill_in 'Color', with: car.color
-    fill_in 'Year', with: car.year
-    fill_in 'Description', with: car.description
+    fill_in 'Color', with: @car.color
+    fill_in 'Year', with: @car.year
+    fill_in 'Mileage', with: @car.mileage
+    fill_in 'Description', with: @car.description
+    select( @car.manufacturer.name, :from => 'Manufacturer')
     click_on 'Submit'
 
     expect(page).to have_content 'Add a New Car'
+    expect(Car.count).to eql(count + 1)
   end
 
   it 'submits an invalid car' do
+    count = Car.count
     visit '/cars/new'
     click_on 'Submit'
 
-    expect(page).to have_content "colorcan't be blank"
-    expect(page).to have_content "yearcan't be blank"
-    expect(page).to have_content "There was an error. Please redo the form."
+    expect(page).to have_content "Colorcan't be blank"
+    expect(page).to have_content "Yearcan't be blank"
+    expect(page).to have_content "Mileagecan't be blank"
+    expect(page).to have_content 'Please review the problems below'
+    expect(Car.count).to eql(count)
   end
 end
