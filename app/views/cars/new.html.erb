@@ -1,0 +1,7 @@
+<%= simple_form_for @car do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :color, required: true %>
+  <%= f.input :year, required: true %>
+  <%= f.association :manufacturer, required: true %>
+  <%= f.button :submit %>
+  <% end %>
