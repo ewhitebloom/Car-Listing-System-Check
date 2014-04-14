@@ -15,8 +15,24 @@ feature 'user creates a car', %Q{
 #   If I do not specify all of the required information in the required formats, the car is not recorded and I am presented with errors.
 #   Upon successfully creating a car, I am redirected so that I can create another car.
 
-it 'submits a valid car'
-it 'submits an invalid car'
-it 'optionally can specify a car description'
+before :each do
+  car = FactoryGirl.create(:car)
+end
 
+it 'submits a valid car' do
+  visit '/cars/new'
+  fill_in 'Color', with: car.color
+  fill_in 'Year', with: car.year
+  fill_in 'Description', with: car.description
+  click_on 'Submit'
+
+  expect(page).to have_content 'Add a New Car'
+end
+
+it 'submits an invalid car' do
+  visit '/cars/new'
+  click_on 'Submit'
+
+  expect(page).to have_content "colorcan't be blank"
+  expect(page).to have_content "yearcan't be blank"
 end
