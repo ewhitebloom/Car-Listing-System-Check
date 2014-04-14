@@ -7,5 +7,4 @@ class Car < ActiveRecord::Base
   validates_numericality_of :year, greater_than: 1980
 
   belongs_to :manufacturer
-
 end
